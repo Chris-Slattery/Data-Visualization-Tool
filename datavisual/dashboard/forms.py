@@ -5,3 +5,6 @@ class CountryDataForm(forms.ModelForm):
     class Meta:
         model = CountryData
         fields = '__all__'
+        widgets = {
+            'population': forms.TextInput(attrs={'type': 'number', 'step': 'any'}),
+        }

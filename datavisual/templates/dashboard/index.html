@@ -1,15 +1,17 @@
 {% extends 'partials/base.html' %}
 {% block title %}Dashboard{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-
 <div class="row mt-3 pt-3">
     <div class="col-md-4">
         <div class="border p-3 shadow">
             <h4>Add Data</h4>
             <hr>
             <form method="POST">
-              {{ form }}
+              {% csrf_token %}
+              {{ form|crispy }}
+              <input type="submit" value="Add" class="btn btn-success btn-block">
 
             </form>
         </div>
@@ -29,7 +31,7 @@
               data: {
                 labels: [{% for data in data %} '{{ data.country }}', {% endfor %}],
                 datasets: [{
-                  label: '# of Votes',
+                  label: 'Population',
                   data: [{% for data in data %} {{ data.population }}, {% endfor %}],
                   backgroundColor: [
                     'rgba(255, 99, 132,)',
